@@ -43,4 +43,21 @@ class Machine {
         (_water >= WATER_AMOUNT) &&
         (_milk >= MILK_AMOUNT);
   }
+
+  void _subtractResources() {
+    _coffeeBeans -= 50;
+    _water -= 100;
+  }
+
+  void makingCoffee() {
+    if (isAvailable()) {
+      _subtractResources();
+      _cash += 150;
+      print('Эспрессо готов');
+    } else {
+      print('Недостаточно ингредиентов для приготовления эспрессо');
+      print('Нужно: кофе - 50г, вода - 100мл');
+      print('Есть: кофе - $_coffeeBeans г, вода - $_water мл');
+    }
+  }
 }
