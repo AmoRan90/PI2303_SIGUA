@@ -4,5 +4,37 @@ class Machine {
   int _water = 0;
   int _cash = 0;
 
+  int COFFEE_BEANS_AMOUNT = 50;
+  int MILK_AMOUNT = 0;
+  int WATER_AMOUNT = 100;
+
   Machine(this._coffeeBeans, this._milk, this._water, this._cash);
+
+  int get coffeeBeans => _coffeeBeans;
+  set coffeeBeans(int value) {
+    if (value >= 0) {
+      _coffeeBeans = value;
+    }
+  }
+
+  int get milk => _milk;
+  set milk(int value) {
+    if (value >= 0) {
+      _milk = value;
+    }
+  }
+
+  int get water => _water;
+  set water(int value) {
+    if (value >= 0) {
+      _water = value;
+    }
+  }
+
+  int get cash => _cash;
+  set cash(int value) {
+    if (value >= 0) {
+      _cash = value;
+    }
+  }
 }
