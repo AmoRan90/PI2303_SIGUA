@@ -37,4 +37,10 @@ class Machine {
       _cash = value;
     }
   }
+
+  bool isAvailable() {
+    return (_coffeeBeans >= COFFEE_BEANS_AMOUNT) &&
+        (_water >= WATER_AMOUNT) &&
+        (_milk >= MILK_AMOUNT);
+  }
 }
