@@ -1,8 +1,9 @@
-// Правильные импорты - без указания имени проекта
 import 'classes/coffee_machine.dart';
+import 'classes/coffee_types.dart';
 import 'classes/resources.dart';
 
 void main() {
+  // Создаем начальные ресурсы
   var resources = Resources(
     coffeeBeans: 100,
     milk: 200,
@@ -10,9 +11,13 @@ void main() {
     cash: 0,
   );
   
+  // Создаем экземпляр кофемашины
   var machine = CoffeeMachine(resources);
   
-  print('Начальное состояние: зерна = ${machine.coffeeBeans} г');
-  machine.makingCoffee();
-  print('Состояние после: зерна = ${machine.coffeeBeans} г');
+  // Создаем экземпляр эспрессо
+  var espresso = Espresso();
+  
+  print('Начальное состояние: зерна = ${machine.coffeeBeans} г, деньги = ${machine.cash} руб');
+  machine.makeCoffee(espresso);
+  print('Состояние после: зерна = ${machine.coffeeBeans} г, деньги = ${machine.cash} руб');
 }
