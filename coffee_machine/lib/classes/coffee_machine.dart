@@ -33,10 +33,11 @@ class CoffeeMachine {
     if (_isAvailable(coffee)) {
       _subtractResources(coffee);
       _resources.cash += coffee.cost;
-      print('${_getCoffeeName(coffee)} готов!');
+      print('✓ ${_getCoffeeName(coffee)} готов!');
       return true;
     } else {
-      print('Недостаточно ресурсов для ${_getCoffeeName(coffee)}!');
+      print('✗ Недостаточно ресурсов для ${_getCoffeeName(coffee)}!');
+      print('  Нужно: зерна=${coffee.requiredResources.coffeeBeans}г, молоко=${coffee.requiredResources.milk}мл, вода=${coffee.requiredResources.water}мл');
       return false;
     }
   }
@@ -46,5 +47,15 @@ class CoffeeMachine {
     if (coffee is Cappuccino) return 'Капучино';
     if (coffee is Latte) return 'Латте';
     return coffee.runtimeType.toString();
+  }
+  
+  void showResources() {
+    print('┌─────────────────────────┐');
+    print('│ Текущие ресурсы:        │');
+    print('│ Кофе: ${_resources.coffeeBeans.toString().padLeft(3)} г          │');
+    print('│ Молоко: ${_resources.milk.toString().padLeft(3)} мл         │');
+    print('│ Вода: ${_resources.water.toString().padLeft(3)} мл         │');
+    print('│ Деньги: ${_resources.cash.toString().padLeft(3)} руб        │');
+    print('└─────────────────────────┘');
   }
 }
