@@ -1,7 +1,7 @@
 import 'resources.dart';
 import '../interfaces/i_coffee.dart';
+import 'coffee_types.dart';
 
-// Класс кофемашины с поддержкой интерфейса ICoffee
 class CoffeeMachine {
   Resources _resources;
 
@@ -42,6 +42,9 @@ class CoffeeMachine {
   }
 
   String _getCoffeeName(ICoffee coffee) {
+    if (coffee is Espresso) return 'Эспрессо';
+    if (coffee is Cappuccino) return 'Капучино';
+    if (coffee is Latte) return 'Латте';
     return coffee.runtimeType.toString();
   }
 }
