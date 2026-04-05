@@ -1,6 +1,12 @@
 import 'dart:async';
 
 class CoffeeMaker {
+  CoffeeMaker();
+
+  factory CoffeeMaker.create() {
+    return CoffeeMaker();
+  }
+
   Future<void> heatWater() async {
     print('start_process: water');
     await Future.delayed(Duration(seconds: 3));
