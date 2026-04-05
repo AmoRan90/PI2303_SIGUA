@@ -22,4 +22,23 @@ class CoffeeMaker {
   Future<void> mixCoffeeAndMilk() async {
     await Future.delayed(Duration(seconds: 3));
   }
+
+  Future<void> makeCoffeeWithoutMilk() async {
+    print('*---*');
+    print('_start_');
+    await heatWater();
+    print('_then_');
+    await brewCoffee();
+    print('_end_');
+  }
+
+  Future<void> makeCoffeeWithMilk() async {
+    print('*---*');
+    print('_start_');
+    await Future.wait([frothMilk(), heatWater()]);
+    print('_then_');
+    await brewCoffee();
+    await mixCoffeeAndMilk();
+    print('_end_');
+  }
 }
