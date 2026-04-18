@@ -35,8 +35,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _calculate() {
     if (_formKey.currentState!.validate()) {
-      double width = double.parse(_widthController.text);
-      double height = double.parse(_heightController.text);
+      String widthStr = _widthController.text.replaceAll(',', '.');
+      String heightStr = _heightController.text.replaceAll(',', '.');
+      
+      double width = double.parse(widthStr);
+      double height = double.parse(heightStr);
       double area = width * height;
       
       setState(() {
@@ -74,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 8),
               TextFormField(
                 controller: _widthController,
-                keyboardType: TextInputType.number,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Введите ширину',
@@ -83,8 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (value == null || value.isEmpty) {
                     return 'Пожалуйста введите ширину';
                   }
-                  if (double.tryParse(value) == null) {
+                  String normalized = value.replaceAll(',', '.');
+                  double? parsed = double.tryParse(normalized);
+                  if (parsed == null) {
                     return 'Введите числовое значение';
+                  }
+                  if (parsed < 0) {
+                    return 'Значение не может быть отрицательным';
                   }
                   return null;
                 },
@@ -97,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 8),
               TextFormField(
                 controller: _heightController,
-                keyboardType: TextInputType.number,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Введите высоту',
@@ -106,8 +114,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (value == null || value.isEmpty) {
                     return 'Пожалуйста введите высоту';
                   }
-                  if (double.tryParse(value) == null) {
+                  String normalized = value.replaceAll(',', '.');
+                  double? parsed = double.tryParse(normalized);
+                  if (parsed == null) {
                     return 'Введите числовое значение';
+                  }
+                  if (parsed < 0) {
+                    return 'Значение не может быть отрицательным';
                   }
                   return null;
                 },
