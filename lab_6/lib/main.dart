@@ -33,6 +33,27 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _heightController = TextEditingController();
   String _result = 'Задайте параметры';
 
+  void _calculate() {
+    if (_formKey.currentState!.validate()) {
+      double width = double.parse(_widthController.text);
+      double height = double.parse(_heightController.text);
+      double area = width * height;
+      
+      setState(() {
+        _result = 'S = $width * $height = $area (мм²)';
+      });
+
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Форма успешно заполнена'),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +79,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   border: OutlineInputBorder(),
                   hintText: 'Введите ширину',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Пожалуйста введите ширину';
+                  }
+                  if (double.tryParse(value) == null) {
+                    return 'Введите числовое значение';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
               Text(
@@ -72,11 +102,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   border: OutlineInputBorder(),
                   hintText: 'Введите высоту',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Пожалуйста введите высоту';
+                  }
+                  if (double.tryParse(value) == null) {
+                    return 'Введите числовое значение';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 30),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _calculate,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                   ),
